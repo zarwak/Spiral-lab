@@ -1,0 +1,9 @@
+# Claude — Summary
+
+> Raw output, unedited. Model version not specified by the tester.
+
+The paper's content is already provided in the upload, so here's the summary directly:
+
+This paper (Kalai, Nachum, Vempala, and Zhang; OpenAI/Georgia Tech, September 2025) investigates why large language models hallucinate—producing confident, plausible-sounding falsehoods—arguing the causes are statistical and socio-technical rather than mysterious. The authors reduce generation to a binary classification problem, "Is-It-Valid" (IIV), proving that a model's generative error rate is lower-bounded by roughly twice its IIV misclassification rate. Drawing on computational learning theory (VC dimension, agnostic learning, Good-Turing missing-mass estimation), they show that even with error-free training data, standard cross-entropy pretraining necessarily produces errors, especially for arbitrary facts (e.g., birthdays) that appear only once in training data.
+
+For post-training, they argue hallucinations persist because most benchmarks use binary 0-1 accuracy grading that penalizes expressions of uncertainty like "I don't know," rewarding confident guessing instead—a claim supported by a survey showing nearly all major benchmarks (GPQA, MMLU-Pro, SWE-bench, HLE, and others) give no credit for abstention. Their central recommendation is not new hallucination-specific evaluations but modifying existing benchmarks to include explicit confidence-threshold penalties. Open challenges include extending the framework beyond single-fact claims to open-ended generation, the limited ability of search/RAG and reasoning to eliminate hallucination, unresolved "latent context" ambiguities, and the socio-technical difficulty of persuading influential leaderboards to actually adopt uncertainty-aware grading.
