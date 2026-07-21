@@ -1,0 +1,9 @@
+# App-wide theme — a minimal, near-monochrome palette.
+# One soft off-white canvas; a single restrained terracotta accent.
+[theme]
+base = "light"
+primaryColor = "#C25E3A"            # the one accent (buttons, active states, focus)
+backgroundColor = "#FBFAF8"         # soft off-white canvas
+secondaryBackgroundColor = "#FFFFFF" # cards / input surfaces
+textColor = "#232323"               # near-black ink
+font = "sans serif"
