@@ -320,7 +320,9 @@ def render_sidebar() -> None:
         )
 
         # --- Token usage footer (feature #17) ---
-        used = sum(m.get("total_tokens", 0) for m in current()["messages"])
+        # `or 0` guards against messages whose token count is None (some Groq
+        # SDK versions don't report usage for a streamed reply).
+        used = sum((m.get("total_tokens") or 0) for m in current()["messages"])
         st.caption(f"Tokens used this chat: **{used:,}**")
 
         # --- Your snapshot (personal insights) ---

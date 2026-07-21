@@ -41,12 +41,22 @@ def stream_completion(client, model, messages, temperature, meta):
     instead of freezing for two seconds and dumping a wall of text.
     """
     start = time.perf_counter()
-    stream = client.chat.completions.create(
+    base_kwargs = dict(
         model=model,
         messages=messages,
         temperature=temperature,
         stream=True,
     )
+    # Newer Groq SDKs (1.x) only report token usage when asked via
+    # stream_options; older ones (0.x) reject that argument but report usage
+    # automatically. Try with it, fall back without it — so token counts work
+    # on both, and the app never crashes on a version mismatch.
+    try:
+        stream = client.chat.completions.create(
+            **base_kwargs, stream_options={"include_usage": True}
+        )
+    except TypeError:
+        stream = client.chat.completions.create(**base_kwargs)
     for chunk in stream:
         # Normal chunks carry a piece of the reply in choices[0].delta.content.
         if chunk.choices:
